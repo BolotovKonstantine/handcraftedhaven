@@ -25,11 +25,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .site-title {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.nav {
+  display: flex;
 }
 
 .nav-list {
@@ -50,6 +55,26 @@ body {
 .nav-list li a:hover {
   color: var(--sky-blue);
 }
+
+/* Hamburger Styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+}
+
 
 /* Hero Section */
 .hero {
@@ -75,6 +100,7 @@ body {
   margin: 0 auto;
 }
 
+/* CTA Button */
 .cta-button {
   display: inline-block;
   background-color: var(--deep-navy);
@@ -111,5 +137,34 @@ main section {
   text-align: center;
   font-size: 0.9rem;
   margin-top: 4rem;
-  border-top: 3px solid var(--color-blue);
+  border-top: 3px solid var(--steel-blue);
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  /* Responsive Navigation */
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background-color: var(--deep-navy);
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--steel-blue);
+  }
+
+  .nav.open {
+    display: block;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
