@@ -2,12 +2,13 @@
   "name": "handcraftedhaven",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "dependencies": {
     "react": "^19.0.0",
