@@ -18,8 +18,7 @@ model User {
   name          String
   role          UserRole  @default(CUSTOMER)
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   artisanProfile ArtisanProfile?
   products      Product[]
@@ -43,8 +42,7 @@ model ArtisanProfile {
   website       String?
   socialMedia   Json?     // Store social media links as JSON
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   userId        String    @unique
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -56,8 +54,7 @@ model Category {
   name          String    @unique
   description   String?
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   products      ProductCategory[]
 }
@@ -72,8 +69,7 @@ model Product {
   images        String[]  // Array of image URLs
   isActive      Boolean   @default(true)
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   artisanId     String
   artisan       User      @relation(fields: [artisanId], references: [id])
@@ -87,11 +83,11 @@ model Product {
 model ProductCategory {
   productId     String
   categoryId    String
-  
+
   // Relations
   product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
   category      Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  
+
   @@id([productId, categoryId])
 }
 
@@ -100,8 +96,7 @@ model CartItem {
   id            String    @id @default(cuid())
   quantity      Int
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   userId        String
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -117,8 +112,7 @@ model Order {
   shippingAddress String
   paymentMethod String
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   userId        String
   user          User      @relation(fields: [userId], references: [id])
@@ -138,13 +132,13 @@ model OrderItem {
   id            String    @id @default(cuid())
   quantity      Int
   priceAtPurchase Decimal @db.Decimal(10, 2)
-  
+
   // Relations
   orderId       String
   order         Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId     String
   product       Product   @relation(fields: [productId], references: [id])
-  
+
   @@unique([orderId, productId])
 }
 
@@ -154,13 +148,12 @@ model Review {
   rating        Int       // 1-5 star rating
   comment       String?
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
+
   // Relations
   userId        String
   user          User      @relation(fields: [userId], references: [id])
   productId     String
   product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
-  
+
   @@unique([userId, productId])
 }
