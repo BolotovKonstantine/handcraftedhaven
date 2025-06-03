@@ -5,7 +5,7 @@ import { Product } from '@/types/Product';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="product-card">+
+    <div className="product-card">
       {//<img src={product.images[0] || '/placeholder.jpg'} alt={product.name} />
       }
       <img src={'/placeholder.svg'} alt={product.name} />
