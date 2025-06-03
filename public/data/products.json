@@ -1,0 +1,77 @@
+[
+  {
+    "id": "1",
+    "name": "Silver Moonstone Necklace",
+    "description": "Handcrafted silver pendant with a genuine moonstone, on an 18-inch sterling silver chain.",
+    "price": 89.99,
+    "inventory": 15,
+    "images": [
+      "https://example.com/images/moonstone-necklace-1.jpg",
+      "https://example.com/images/moonstone-necklace-2.jpg"
+    ],
+    "artisan": "Emma Johnson",
+    "categories": ["Jewelry"]
+  },
+  {
+    "id": "2",
+    "name": "Copper Wire Wrapped Earrings",
+    "description": "Elegant earrings handcrafted with copper wire and small turquoise beads.",
+    "price": 45.0,
+    "inventory": 20,
+    "images": [
+      "https://example.com/images/copper-earrings-1.jpg"
+    ],
+    "artisan": "Emma Johnson",
+    "categories": ["Jewelry"]
+  },
+  {
+    "id": "3",
+    "name": "Ceramic Tea Set",
+    "description": "Handcrafted 5-piece ceramic tea set with a teapot and four cups in a blue glaze finish.",
+    "price": 120.0,
+    "inventory": 8,
+    "images": [
+      "https://example.com/images/tea-set-1.jpg",
+      "https://example.com/images/tea-set-2.jpg"
+    ],
+    "artisan": "Michael Chen",
+    "categories": ["Pottery"]
+  },
+  {
+    "id": "4",
+    "name": "Decorative Ceramic Vase",
+    "description": "Tall ceramic vase with a unique textured surface, perfect for fresh or dried flowers.",
+    "price": 65.0,
+    "inventory": 12,
+    "images": [
+      "https://example.com/images/ceramic-vase-1.jpg"
+    ],
+    "artisan": "Michael Chen",
+    "categories": ["Pottery", "Art"]
+  },
+  {
+    "id": "5",
+    "name": "Hand-Woven Wool Blanket",
+    "description": "Warm and cozy blanket hand-woven from 100% natural wool with traditional patterns.",
+    "price": 189.99,
+    "inventory": 5,
+    "images": [
+      "https://example.com/images/wool-blanket-1.jpg",
+      "https://example.com/images/wool-blanket-2.jpg"
+    ],
+    "artisan": "Sophia Martinez",
+    "categories": ["Textiles"]
+  },
+  {
+    "id": "6",
+    "name": "Embroidered Table Runner",
+    "description": "Beautiful hand-embroidered table runner with floral motifs, perfect for special occasions.",
+    "price": 55.0,
+    "inventory": 15,
+    "images": [
+      "https://example.com/images/table-runner-1.jpg"
+    ],
+    "artisan": "Sophia Martinez",
+    "categories": ["Textiles"]
+  }
+]
