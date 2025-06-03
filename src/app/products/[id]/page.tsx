@@ -35,7 +35,7 @@ export default async function ProductDetailPage({ params }: Props) {
           <p className="product-categories">
             Categories: {product.categories.join(', ')}
           </p>
-          <button className="cta-button">Add to Cart</button>
+          <button className="cta-button">Add Review</button>
         </div>
       </div>
     </main>
