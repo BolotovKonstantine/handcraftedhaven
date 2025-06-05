@@ -2,6 +2,7 @@ import { Product } from '@/types/Product';
 import path from 'path';
 import { promises as fs } from 'fs';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 type Props = {
   params: {
@@ -21,10 +22,12 @@ export default async function ProductDetailPage({ params }: Props) {
     <main>
       <div className="product-detail-container">
         <div className="product-detail-image">
-          <img
+          <Image
             //src={product.images[0] || '/placeholder.svg'}
             src={'/placeholder.svg'}
             alt={product.name}
+            width={500}
+            height={500}
           />
         </div>
         <div className="product-detail-content">

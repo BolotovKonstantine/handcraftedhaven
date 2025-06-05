@@ -1,14 +1,15 @@
 // import { Product } from '@prisma/client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Product } from '@/types/Product';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="product-card">
-      {//<img src={product.images[0] || '/placeholder.jpg'} alt={product.name} />
+      {//<Image src={product.images[0] || '/placeholder.jpg'} alt={product.name} width={200} height={200} />
       }
-      <img src={'/placeholder.svg'} alt={product.name} />
+      <Image src={'/placeholder.svg'} alt={product.name} width={200} height={200} />
       <Link href={`/products/${product.id}`}>
         <h3>{product.name}</h3>
       </Link>

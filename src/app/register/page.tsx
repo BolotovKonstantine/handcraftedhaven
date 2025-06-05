@@ -30,8 +30,8 @@ export default function RegisterPage() {
       // Successful registration
       // Redirect to login page
       router.push('/login');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     }
   };
 

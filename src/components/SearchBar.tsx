@@ -1,6 +1,8 @@
+type Filters = { search: string; category: string; priceMin: string; priceMax: string };
+
 type Props = {
-  filters: { search: string; category: string; priceMin: string; priceMax: string };
-  setFilters: (val: any) => void;
+  filters: Filters;
+  setFilters: (val: Filters) => void;
   onSearch: () => void;
 };
 
