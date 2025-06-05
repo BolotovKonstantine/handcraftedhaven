@@ -5,6 +5,7 @@ Handcrafted Haven is an online marketplace designed to connect artisans and craf
 
 ## Features
 - **User Authentication**: Secure login and registration for both artisans and customers
+- **Role-Based Access Control**: Different user roles (Customer, Artisan, Admin) with specific permissions and access rights
 - **Artisan Profiles**: Dedicated spaces for creators to share their story and showcase their work
 - **Product Listings**: Detailed product pages with descriptions, pricing, and high-quality images
 - **Shopping Cart**: Easy-to-use cart functionality for a seamless shopping experience
@@ -68,6 +69,90 @@ handcraftedhaven/
 ├── public/           # Static assets
 ├── package.json      # Project dependencies and scripts
 └── README.md         # Project documentation
+```
+
+## Authentication and Role-Based Access Control
+
+Handcrafted Haven implements a comprehensive authentication system and role-based access control to secure the application and provide different functionality based on user roles.
+
+### Authentication System
+
+The authentication system uses a client-side approach with the following components:
+
+- **AuthContext**: A React context that provides authentication state and methods throughout the application
+- **Login/Register Pages**: User interfaces for authentication
+- **API Routes**: Server endpoints for handling authentication requests
+
+#### Authentication Flow
+
+1. **Registration**: Users can register as either Customers or Artisans
+2. **Login**: Users provide credentials which are validated against the database
+3. **Session Management**: User data is stored in localStorage for persistence across page refreshes
+4. **Logout**: Clears user data from the application state
+
+#### Files Structure
+
+```
+src/
+├── lib/
+│   └── AuthContext.tsx    # Authentication context provider
+├── app/
+│   ├── login/
+│   │   └── page.tsx       # Login page
+│   ├── register/
+│   │   └── page.tsx       # Registration page
+│   └── api/auth/          # Authentication API routes
+│       ├── login/
+│       │   └── route.ts   # Login endpoint
+│       ├── register/
+│       │   └── route.ts   # Registration endpoint
+│       └── logout/
+│           └── route.ts   # Logout endpoint
+```
+
+### Role-Based Access Control
+
+The application supports three user roles, each with different permissions:
+
+1. **CUSTOMER**: Regular users who can browse products, make purchases, and view their orders
+2. **ARTISAN**: Creators who can manage their products, fulfill orders, and maintain their profile
+3. **ADMIN**: System administrators who can manage all users, products, and system settings
+
+#### Role-Based Components
+
+- **RoleGuard**: A higher-order component that restricts page access based on user roles
+- **useRoleCheck**: A custom hook for checking user roles in components
+
+#### Usage Examples
+
+Protecting a route with RoleGuard:
+```tsx
+import RoleGuard from '../components/RoleGuard';
+
+export default function AdminPage() {
+  return (
+    <RoleGuard allowedRoles={['ADMIN']} fallbackPath="/">
+      <div>Admin content here</div>
+    </RoleGuard>
+  );
+}
+```
+
+Using role check hooks in a component:
+```tsx
+import { useIsArtisan } from '../lib/useRoleCheck';
+
+export default function MyComponent() {
+  const { isArtisan, loading } = useIsArtisan();
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      {isArtisan ? <div>Artisan content</div> : <div>Regular content</div>}
+    </div>
+  );
+}
 ```
 
 ## Database Setup
