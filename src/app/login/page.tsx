@@ -20,8 +20,8 @@ export default function LoginPage() {
       await login(email, password);
       // Successful login, redirect to home page
       router.push('/');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     }
   };
 
@@ -60,7 +60,7 @@ export default function LoginPage() {
       </form>
 
       <p className="auth-link">
-        Don't have an account? <Link href="/register">Register here</Link>
+        Don&apos;t have an account? <Link href="/register">Register here</Link>
       </p>
     </div>
   );

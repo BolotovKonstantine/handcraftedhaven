@@ -39,8 +39,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Return user data (excluding password)
-    const { password: _, ...userData } = user;
-    
+    const { password, ...userData } = user;
+
     return NextResponse.json({
       message: 'Login successful',
       user: userData

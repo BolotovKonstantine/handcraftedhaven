@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function HomePage() {
   return (
     <>
@@ -7,9 +9,9 @@ export default function HomePage() {
           <p>
             Discover unique, artisan-made products and support creators who craft with heart and soul.
           </p>
-          <a href="/products" className="cta-button">
+          <Link href="/products" className="cta-button">
             Start Exploring
-          </a>
+          </Link>
         </div>
       </section>
 

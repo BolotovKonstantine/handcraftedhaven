@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import ProductCard from '@/components/ProductCard';
 import SearchBar from '@/components/SearchBar';
 // import { Product } from '@prisma/client';
@@ -15,16 +15,16 @@ export default function ProductsPage() {
     priceMax: '',
   });
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     const query = new URLSearchParams(filters).toString();
     const res = await fetch(`/api/products?${query}`);
     const data = await res.json();
     setProducts(data);
-  };
+  }, [filters]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   return (
     <main>
