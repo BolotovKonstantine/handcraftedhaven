@@ -3,11 +3,14 @@
 import { useEffect, useState, useCallback } from 'react';
 import ProductCard from '@/components/ProductCard';
 import SearchBar from '@/components/SearchBar';
-// import { Product } from '@prisma/client';
-import { Product } from '@/types/Product';
+import { Product } from '@prisma/client';
+
+type ProductWithArtisan = Product & {
+  artisan: string; 
+};
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductWithArtisan[]>([]); 
   const [filters, setFilters] = useState({
     search: '',
     category: '',
@@ -18,7 +21,7 @@ export default function ProductsPage() {
   const fetchProducts = useCallback(async () => {
     const query = new URLSearchParams(filters).toString();
     const res = await fetch(`/api/products?${query}`);
-    const data = await res.json();
+    const data: ProductWithArtisan[] = await res.json(); 
     setProducts(data);
   }, [filters]);
 

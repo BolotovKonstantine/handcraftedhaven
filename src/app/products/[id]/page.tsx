@@ -1,44 +1,47 @@
-import { Product } from '@/types/Product';
-import path from 'path';
-import { promises as fs } from 'fs';
+
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 type Props = {
-  params: {
-    id: string;
-  };
+  params: { id: string };
 };
 
 export default async function ProductDetailPage({ params }: Props) {
-  const filePath = path.join(process.cwd(), 'public/data/products.json');
-  const fileData = await fs.readFile(filePath, 'utf-8');
-  const products: Product[] = JSON.parse(fileData);
+  const product = await prisma.product.findUnique({
+    where: { id: params.id },
+    include: {
+      categories: {
+        include: { category: true },
+      },
+      artisan: true,
+    },
+  });
 
-  const product = products.find((p) => p.id === params.id);
   if (!product) return notFound();
+
+  const categoryNames = product.categories.map((c) => c.category.name);
 
   return (
     <main>
       <div className="product-detail-container">
         <div className="product-detail-image">
-          <Image
-            //src={product.images[0] || '/placeholder.svg'}
+          <img
+            //src={product.images[0] || '/placeholder.jpg'}
             src={'/placeholder.svg'}
             alt={product.name}
-            width={500}
-            height={500}
           />
         </div>
         <div className="product-detail-content">
           <h1>{product.name}</h1>
           <p className="product-description">{product.description}</p>
           <p className="price">${product.price.toFixed(2)}</p>
-          <p className="artisan-name">by {product.artisan}</p>
+          <p className="artisan-name">by {product.artisan.name}</p>
           <p className="product-categories">
-            Categories: {product.categories.join(', ')}
+            Categories: {categoryNames.join(', ')}
           </p>
-          <button className="cta-button">Add Review</button>
+          <button className="cta-button">Add to Cart</button>
         </div>
       </div>
     </main>

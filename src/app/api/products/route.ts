@@ -1,33 +1,38 @@
+// src/app/api/products/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
-import { promises as fs } from 'fs';
+import { PrismaClient } from '@prisma/client';
 
-interface Product {
-  name: string;
-  categories: string[];
-  price: number;
-}
+const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
-  const filePath = path.join(process.cwd(), 'public/data/products.json');
-  const fileData = await fs.readFile(filePath, 'utf-8');
-  const products = JSON.parse(fileData);
-
   const { searchParams } = req.nextUrl;
-  const search = searchParams.get('search')?.toLowerCase() || '';
-  const category = searchParams.get('category')?.toLowerCase();
+  const search = searchParams.get('search') || '';
+  const category = searchParams.get('category');
   const priceMin = parseFloat(searchParams.get('priceMin') || '0');
   const priceMax = parseFloat(searchParams.get('priceMax') || '999999');
 
-  const filtered = products.filter((product: Product) => {
-    const matchName = product.name.toLowerCase().includes(search);
-    const matchCategory = category
-      ? product.categories.some((cat: string) => cat.toLowerCase() === category)
-      : true;
-    const matchPrice = product.price >= priceMin && product.price <= priceMax;
-
-    return matchName && matchCategory && matchPrice;
+  const products = await prisma.product.findMany({
+    where: {
+      AND: [
+        { name: { contains: search, mode: 'insensitive' } },
+        { price: { gte: priceMin, lte: priceMax } },
+        category
+          ? {
+              categories: {
+                some: {
+                  category: {
+                    name: { equals: category, mode: 'insensitive' },
+                  },
+                },
+              },
+            }
+          : {},
+      ],
+    },
+    include: {
+      categories: true,
+    },
   });
 
-  return NextResponse.json(filtered);
+  return NextResponse.json(products);
 }
