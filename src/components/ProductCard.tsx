@@ -18,7 +18,6 @@ export default function ProductCard({ product }: { product: ProductWithArtisan }
       </Link>
       <p>{product.description}</p>
       <p className="price">${product.price.toString()}</p>
-      <p style={{ fontSize: '0.85rem', color: '#666' }}>by {product.artisan}</p>
     </div>
   );
 }
